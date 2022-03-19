@@ -1,0 +1,41 @@
+.sidebar-item{
+    width:100%;
+    height:3.5rem;
+    position:relative;
+    background-color:transparent;
+    display:flex;
+    align-items:center;
+
+    margin:0 0 2rem 0;
+    padding:0 0 0 1rem;
+    overflow:hidden;
+    z-index:5;
+    h3{
+        font-size:2rem;
+        color:#DFE8FF;
+    }
+
+    svg{
+        margin:0 1rem 0 1rem;
+    }
+
+    &::after{
+        content:"";
+        width:0%;
+        height:5px;
+        position:absolute;
+        bottom:0;
+        transform-origin:left;
+        background-color:var(--dark1);
+        transition:width .3s ease-in;
+        z-index:-2;
+        border-radius:8px;
+    }
+
+    &:hover::after{
+        width:55%;
+
+    }
+    
+
+}

@@ -1,0 +1,39 @@
+.recommended{
+    width:100%;
+    flex:0.5;
+    display:flex;
+    flex-direction:column;
+    // align-items:center;
+    // overflow:scroll;
+    &__header{
+        margin-bottom:1.5rem;
+        font-size:2rem;
+    }
+    &__cards{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px,.5fr));
+        // grid-template-rows:;
+        // grid-template-rows:repeat(auto-fit, minmax(250px,.5fr));
+
+        
+        
+    }
+}
+
+.recommended__cards::-webkit-scrollbar {
+            width: 80%;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 1rem;
+            padding: 2px;
+        }
+
+.recommended__cards::-webkit-scrollbar-thumb {
+            background-color: #729fed;
+            border-radius: 1rem;
+        }
+
+.recommended__cards::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
