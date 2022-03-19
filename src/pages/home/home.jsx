@@ -4,7 +4,7 @@ import SearchInput from "../../components/search-input/search-input.component";
 import Recommended from '../../components/recommended/recommended.component';
 import Playlist from '../../components/playlist/playlist.component';
 import Sidebar from '../../components/sidebar/sidebar.component';
-import MusicPlayer from '../../components/music-player/music-player.component';
+// import MusicPlayer from '../../components/music-player/music-player.component';
 
 import svgContainer from "../../assets/icons/sprite.svg"
 
