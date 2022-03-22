@@ -19,7 +19,7 @@ body {
   --darker:#091127;
   --light:#EAF0FF;
   width:100vw;
-  background-color: var(--darker);
+ 
   color: #fff;
 }
 button:focus,input:focus {

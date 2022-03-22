@@ -1,5 +1,77 @@
 import {songTitles , artists} from "./model.js";
+<div class="music-details">
+                    <div class="music-details__controls">
+                        <button>
+                            {/* <svg class="music__volume-mute  icon-1 icon-white">
+                                <use xlink:href="./icons/sprite2.svg#icon-volume-medium">
+            
+                                </use>
+                            </svg> */}
+                        </button>
+                        
+                        <div class="music__shuffle-buttons">
+                            <button>
+                                {/* <svg class="music__volume-mute icon-1">
+                                    <use xlink:href="./icons/sprite.svg#icon-loop">
+                
+                                    </use>
+                                </svg> */}
+                            </button>
+                            <button>
+                                {/* <svg class="music__volume-mute icon-1">
+                                    <use xlink:href="./icons/sprite.svg#icon-random">
+                
+                                    </use>
+                                </svg> */}
+                            </button>
+                        </div>
 
+                    </div>
+
+                    <div class="music__timestamps">
+
+                        <p class="music__current-position">00:00</p>
+
+                        <p class="music__duration">00:00</p>
+                        
+                    </div>
+                    <section class="music-player-2">
+                        <div class="music-progress-bar">
+                            <div class="music-bar">
+
+                            </div>
+                        </div>
+
+
+                        <div class="music-player-2__btns">
+                            <button  class="music-btn__backward-2">
+
+                            {/* <svg class="music-control__backward-2 icon-2 icon-white-2">
+                                <use xlink:href="./icons/sprite.svg#icon-previous2"></use>
+                            </svg> */}
+                
+                            </button>
+                
+                
+                            <button  class="music-btn__play-2">
+                            
+                            {/* <svg class="music-control__play-2 icon-2 icon-white-2">
+                                <use xlink:href="./icons/sprite.svg#icon-play3">
+                                </use>
+                            </svg> */}
+                            </button>
+                
+                            <button  class="music-btn__forward-2">
+                
+                            {/* <svg class="music-control__forward-2 icon-2 icon-white-2" >
+                                <use xlink:href="./icons/sprite.svg#icon-next2">
+                                </use>
+                            </svg> */}
+                            </button>
+                        </div>
+                    </section>
+                    
+                </div>
 
 
 const body = document.querySelector(".body")

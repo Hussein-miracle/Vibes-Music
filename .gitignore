@@ -8,6 +8,8 @@
 # testing
 /coverage
 /music
+music/
+.env
 # production
 /build
 

@@ -1,28 +1,41 @@
-import React,{useState} from "react";
+import React from "react";
+import {motion} from "framer-motion";
+import "./music-card.styles.scss";
 
 
-import img from "../../assets/images/monstersGoBump.jpg"
-
-import "./music-card.styles.scss"
-const MusicCard = ({imgURL,title,addArtists,artists}) => {
+const MusicCard = ({imgURL,title,addArtists,artists,light}) => {
 
     return (
-        <div className="music-card">
+        <motion.div className="music-card" 
+        drag
+         dragElastic={3} dragConstraints= {{
+                left:0,
+                right:0,
+                top:0,
+                bottom:0
+            }}
+        >
 
-            <div className="music-card__img-container">
+            <motion.div className="music-card__img-container" title={artists} >
                 <img 
                 className="music-card__img-container--img-1"
-                src={`${imgURL}`} alt={`${title}`} />
+                src={`${imgURL}`} alt={`${title}`} title={artists} />
                 <img 
                 className="music-card__img-container--img-2"
                 src={`${imgURL}`} alt={`${title}`} />
-            </div>
+            </motion.div>
 
-            <h3 className="music-card__title">{title}</h3>
+            <h3 className="music-card__title" style={{
+                color:light ? "var(--dark)" : "var(--light)"
+            }}>{title}</h3>
 
-            {addArtists ? (<h5 className="music-card__name">{artists}</h5>) : null }
+            {addArtists ? (<h5 className="music-card__name"
+            style={{
+                color:light ? "var(--dark)" : "var(--light)"
+            }}
+            >{artists}</h5>) : null }
 
-        </div>
+        </motion.div>
     )
 }
 
