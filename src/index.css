@@ -17,13 +17,27 @@ body {
   --dark1:#1F1D36;
   --dark:#091227;
   --darker:#091127;
-  --light:#EAF0FF;
+  --lighter:#EAF0FF;
+  --light:#F7FAFF;
+  --light2-d:rgba(247, 250, 255,0.69);
+  --light2-l:#b4b9c4;
+  --text-w-l:#8996B8;
+  --text-w-d:#A5C0FF;
   width:100vw;
  
   color: #fff;
 }
 button:focus,input:focus {
   outline: none;
+}
+
+button{
+  background-color:transparent;
+  outline:none;
+  border:none;
+  &:focus{
+    outline:none;
+  }
 }
 
 html {

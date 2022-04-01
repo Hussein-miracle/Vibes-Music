@@ -3,8 +3,9 @@ import {connect} from "react-redux";
 import "./recommended.styles.scss";
 import {createStructuredSelector} from "reselect"
 
-import {selectBgMode} from "../../redux/user/user.selectors";
-import {selectMusicsData} from "../../redux/musics/musics.selectors";
+import {selectBgMode , selectAllMusics } from "../../redux/user/user.selectors";
+// import {selectBgMode} from "../../redux/user/user.selectors";
+// import {selectMusicsData} from "../../redux/musics/musics.selectors";
 import MusicCard from "../music-card/music-card.component";
 
 
@@ -21,9 +22,10 @@ const Recommended = ({light,musics}) => {
                 <div className="recommended__cards">
 
                   {
-                    musics.slice(0,8).map(({imgURL,title,addArtists,artists,id}) => <MusicCard 
+                    musics.slice(0,9).map(({imgURL,title,addArtists,artists,id}) => <MusicCard 
                     light={light}
                     key={`${id}`}
+                    id={id}
                     imgURL={imgURL}
                     title={title}
                     addArtists
@@ -38,7 +40,7 @@ const Recommended = ({light,musics}) => {
 }
 const mapStateToProps = createStructuredSelector({
     light:selectBgMode,
-    musics:selectMusicsData
+    musics:selectAllMusics 
 })
 
 

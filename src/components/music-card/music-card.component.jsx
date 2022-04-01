@@ -1,14 +1,24 @@
 import React from "react";
 import {motion} from "framer-motion";
+import {connect} from "react-redux";
 import "./music-card.styles.scss";
+import {setCurrentMusic,likeMusic} from "../../redux/user/user.actions";
 
 
-const MusicCard = ({imgURL,title,addArtists,artists,light}) => {
+const MusicCard = ({imgURL,title,addArtists,artists,light,id,setCurrentMusic,likeMusic}) => {
+
 
     return (
         <motion.div className="music-card" 
+        onClick={() => setCurrentMusic(id)}
+
+        onDoubleClick={() => likeMusic(id)}
+        
         drag
-         dragElastic={3} dragConstraints= {{
+
+        dragElastic={3} 
+
+        dragConstraints= {{
                 left:0,
                 right:0,
                 top:0,
@@ -39,4 +49,9 @@ const MusicCard = ({imgURL,title,addArtists,artists,light}) => {
     )
 }
 
-export default MusicCard;
+const mapDispatchToProps = (dispatch) => ({
+    setCurrentMusic :  (musicID) => dispatch(setCurrentMusic(musicID)),
+    likeMusic: (id) => dispatch(likeMusic(id))  
+})
+
+export default connect(null,mapDispatchToProps)(MusicCard);

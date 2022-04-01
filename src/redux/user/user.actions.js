@@ -18,29 +18,41 @@ export const closeMenu = () => {
     }
 }
 
-export const playCurrentMusic = (music) => {
+export const setCurrentMusic = (musicId) => ({
+    type:UserActionTypes.SET_CURRENT_MUSIC,
+    payload:musicId
+})
+
+export const playMusic = () => {
     return {
-        type:UserActionTypes.PLAY_CURRENT_MUSIC,
-        payload:music
+        type:UserActionTypes.PLAY_MUSIC,
     }
 }
 
-export const pauseCurrentMusic = (music) => {
+
+export const pauseMusic = () => {
     return {
-        type:UserActionTypes.PAUSE_CURRENT_MUSIC,
-        payload:music
+        type:UserActionTypes.PAUSE_MUSIC,
+
+    }
+}
+export const likeMusic = (musicId) => {
+    return {
+        type:UserActionTypes.LIKE_MUSIC,
+        payload:musicId
+
     }
 }
 
-export const playNextMusic = (music) => {
+export const playNextMusic = (curMusicIndex) => {
     return {
         type:UserActionTypes.PLAY_NEXT_MUSIC,
-        payload:music
+        payload:curMusicIndex
     }
 }
-export const playPreviousMusic = (music) => {
+export const playPreviousMusic = (curMusicIndex) => {
     return {
         type:UserActionTypes.PLAY_PREVIOUS_MUSIC,
-        payload:music
+        payload:curMusicIndex
     }
 }

@@ -3,8 +3,8 @@ import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 
 
-import {selectMusicsData} from "../../redux/musics/musics.selectors";
-import {selectBgMode} from "../../redux/user/user.selectors";
+// import {selectMusicsData} from "../../redux/musics/musics.selectors";
+import {selectBgMode,selectAllMusics } from "../../redux/user/user.selectors";
 import MusicCard from "../music-card/music-card.component";
 
 
@@ -22,7 +22,7 @@ const Playlist = ({light,musics}) => {
                     <div className="playlist__cards">
 
             {
-                musics.slice(9,17).map(({imgURL,title,id}) =>  <MusicCard light={light} key={id} imgURL={imgURL} title={title} />)
+                musics.slice(9,18).map(({imgURL,title,id}) =>  <MusicCard light={light} id={id} key={id} imgURL={imgURL} title={title} />)
             }
     
                     
@@ -34,7 +34,7 @@ const Playlist = ({light,musics}) => {
 
 const mapStateToProps = createStructuredSelector({
     light:selectBgMode,
-    musics:selectMusicsData
+    musics:selectAllMusics 
 })
 
 

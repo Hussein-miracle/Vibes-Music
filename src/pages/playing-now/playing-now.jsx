@@ -1,22 +1,51 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,useRef} from "react";
 import {connect} from "react-redux";
 import {motion} from "framer-motion";
+import {Swipeable} from "react-swipeable"
 import {Link} from "react-router-dom";
 import {createStructuredSelector} from "reselect";
-import { Swipeable } from "react-swipeable";
+// import Swiper core and required modules
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
 
 import "./playing-now.styles.scss";
 import svgCont from "../../assets/icons/sprite.svg";
 import SliderCard from "../../components/slider-card/slider-card.component";
+import PlayingNowPlayer from "../../components/playing-now-player/playing-now-player";
 
-import {selectMusicsData} from "../../redux/musics/musics.selectors";
-import {selectBgMode} from "../../redux/user/user.selectors";
-
+// import {selectMusicsData} from "../../redux/musics/musics.selectors";
+import {selectBgMode , selectAllMusics } from "../../redux/user/user.selectors";
 
 const PlayingNow = ({light,musics}) => {
     const [sliderPosition,setSliderPosition] = useState(0);
+    const [progress , setProgress] = useState("0%")
+    const audioTag = useRef(null); 
+
+    const setCurrentProgress = (e) =>{
+    const {duration , currentTime} = e.target;
+    let percent = `${(currentTime / duration) * 100}%`;
+    setProgress(percent)
+
+  }
 
 
+  const seekProgress = (e) =>{
+    console.log(e)
+    let positionClicked = e.clientX 
+    let totalWidth = e.target.clientWidth;
+    let seekTo = (positionClicked / totalWidth) ;
+    audioTag.current.currentTime = seekTo * audioTag.current?.duration;
+    setProgress(`${seekTo * 100}`)
+
+
+  }
 
 
 
@@ -62,38 +91,82 @@ const PlayingNow = ({light,musics}) => {
 
             <div className="playing-now__content">
 
-                {/* <button onClick={handleSwipedLeft}>Left</button>
-                <button onClick={handleSwipedRight}>Right</button> */}
 
                 <Swipeable 
                 // ref={slider} 
-                 className="playing-now__content--cards-container slider " whileTap={{
+                 className="playing-now__content--cards-container" whileTap={{
                     cursor:"grabbing"
                 }}
                
                 preventDefaultTouchmoveEvent={false}
                 onSwiped={handleSwiped}>
-                                       <motion.div className="slider__inner" 
-                    >
-                        {
-                            musics.slice(0,10).map(({id,imgURL,title,artists},index) =>
-                                <SliderCard key={id}
+                 
+                    
+                        <Swiper
+        className="slider__inner" 
+        onSlideChange={(e) => console.log(e.dir)}
+      onSwiper={(swiper) => console.log(swiper)}
+
+      effect={'coverflow'}
+    initialSlide={0}
+
+    grabCursor={true}
+    centeredSlides={true}
+    // scale={1.8}
+    coverflowEffect = {{
+        rotate: 0,
+        stretch: 0,
+        depth: 50,
+        modifier: 1 ,
+        slideShadows: true,
+        scale:3
+    }
+  }
+  breakpoints={{
+          // when window width is >= 320px
+          320: {
+            slidesPerView: 1.75,
+            spaceBetween: 10
+          },
+          // when window width is >= 480px
+          480: {
+            slidesPerView: 1.5,
+            spaceBetween: 15
+          },
+          // when window width is >= 640px
+          640: {
+            slidesPerView: 1.75,
+            spaceBetween: 18
+          }
+        }}
+    >
+      
+       {
+                            musics.map(({id,imgURL,title,artists},index) =>
+                            <SwiperSlide key={id}>
+                                <SliderCard 
+                                id={id}
                                 index={index}
                                 position={sliderPosition}
-                                                title={title} 
-                                                                addartists
-                                                                artists={artists} 
-                                                                light={light} 
-                                                                imgURL={imgURL} />)
+                                title={title} 
+                                addartists
+                                artists={artists} 
+                                light={light} 
+                                imgURL={imgURL} />
+                                
+                                </SwiperSlide>
+                                )
                         }
-                    </motion.div>
-                </Swipeable>
 
- 
-             
-                
+    </Swiper>
+
+            
+                </Swipeable>
+                <PlayingNowPlayer/>
+
             </div>
 
+            
 
 
         </section>       
@@ -103,7 +176,7 @@ const PlayingNow = ({light,musics}) => {
 
 const mapStateToProps = createStructuredSelector({
     light:selectBgMode,
-    musics:selectMusicsData
+    musics:selectAllMusics
 })
 
 

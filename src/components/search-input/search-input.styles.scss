@@ -1,9 +1,5 @@
 .search {
     flex:.75;  
-      // width:60vw;
-    // grid-column: 2/span 1;
-    // justify-self: end;
-    // align-self: center;
     position: relative;
     display: grid;
     grid-template-columns: 1fr min-content;
@@ -20,7 +16,6 @@
         z-index: 10;
         font-size:1.3rem;
         transition:width .3s linear;
-        // background-color:#091127;
     }
 
     &__btn{

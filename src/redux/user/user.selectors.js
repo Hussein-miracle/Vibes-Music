@@ -10,3 +10,25 @@ export const selectMenuDisplay = createSelector(
     [selectUser],
     (user) => user.menuDisplay
 )
+
+
+export const selectCurrentMusic =  createSelector(
+    [selectUser],
+    (user)=> user.currentMusic 
+)
+
+
+export const selectAllMusics =  createSelector(
+    [selectUser],
+    (user)=> user.allMusics
+)
+
+export const selectLikedMusics =  createSelector(
+    [selectUser],
+    (user)=> user.likedMusics
+)
+
+export const selectPlayState =  createSelector(
+    [selectUser],
+    (user)=> user.play
+)

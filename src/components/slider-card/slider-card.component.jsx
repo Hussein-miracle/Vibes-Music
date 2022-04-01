@@ -1,11 +1,14 @@
 import React from "react";
+// import {connect} from "react-redux";
 import {motion} from "framer-motion";
-
+import LikeBtn from "../like-button/like-button";
 import "./slider-card.styles.scss";
 
-const SliderCard = ({imgURL,title,addartists,artists,light,position,index}) => {
+const SliderCard = ({imgURL,title,addartists,artists,light,position,id,index }) => {
+
     return (
         <motion.div className="slider-card"
+
         // drag="x"
         //           dragElastic={3} dragConstraints= {{
         //         left:0,
@@ -13,12 +16,12 @@ const SliderCard = ({imgURL,title,addartists,artists,light,position,index}) => {
         //         top:0,
         //         bottom:0
         //     }}
+
         initial= {{                                                                         scale:0,
       rotation:-180 }}
         animate={{
             rotate:0,
-            // left:`${-30}vw`,
-            left:`-${(index - position) * 60 -60}vw`,
+            left:`${(index - position) * 60 - 45}vw`,
             scale: index === position ? 1 : 0.75,
 
         }}
@@ -26,9 +29,11 @@ const SliderCard = ({imgURL,title,addartists,artists,light,position,index}) => {
             type:"spring",
             duration:2,
             stiffness:260,
-            damping:20,
+            damping:25,
 
-        }}    >
+        }}  
+        
+        >
         
 
             <div className="slider-card__img-container" title={artists}
@@ -52,9 +57,18 @@ const SliderCard = ({imgURL,title,addartists,artists,light,position,index}) => {
             >{artists}</h5>) : null }
 
 
+            <LikeBtn id={id} />
+
+
+
+
 
         </motion.div>
     )
 }
+// const mapDispatchToProps = (dispatch) => ({
+//   like: (id) => dispatch(likeMusic(id))  
+// })
 
-export default SliderCard;
+// export default connect(null,mapDispatchToProps)(SliderCard);
+export default (SliderCard);

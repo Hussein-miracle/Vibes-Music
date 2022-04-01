@@ -122,14 +122,15 @@
         justify-content: space-between;
         height:94.5vh;
         &--right{
-            flex:.8;
+            flex:1;
             display:flex;
             flex-direction:column;
+            align-items: center;
             gap:2rem;
 
             height:100%;
-        
-            padding-left:1rem;
+            width: 100%;
+            padding-left:0;
             overflow-y:scroll;
 
             scrollbar-width: thin;
@@ -140,8 +141,9 @@
         }
 
         &--left{
-            flex:.2;
-            height:100%;
+            display: none;
+            // flex:.2;
+            // height:100%;
         }
     }
 }

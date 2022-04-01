@@ -1,15 +1,18 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import {connect} from "react-redux";
 import {createStructuredSelector} from "reselect";
 
 import {selectBgMode} from "../../redux/user/user.selectors";
 
-import "./search-input.styles.scss"
+import "./search-input.styles.scss";
 
 
 
 const SearchInput = ({light}) => {
     const [expand,setExpand] = useState(false);
+    const [input ,setInput] = useState("rema");
+
+    
 
 
     const handleClick = (e) => {
@@ -22,15 +25,15 @@ const SearchInput = ({light}) => {
             
                     <input
                     style={{
-                        width: expand ? "65%" : "0%",
+                        width: expand ? "65vw" : "0%",
                         opacity: expand ? 1 : 0,
-                        color: light ?   "#1F1D36"  : "#fff",
-                        // backgroundColor: light ? "#091127" : "#EAF0F" 
+                        color: light ?   "#1F1D36"  : "#fff" 
                     }}
                     type="text"
                     className="search__input"
                     id="search-input"
                     placeholder="Search music title or name"
+                    
                     />
     
                     

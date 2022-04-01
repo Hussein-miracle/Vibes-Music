@@ -1,27 +1,51 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import{Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 import {createStructuredSelector} from "reselect";
-import {selectMusicsData} from "../../redux/musics/musics.selectors";
-import {selectBgMode} from "../../redux/user/user.selectors";
+
+import {selectBgMode , selectAllMusics,selectLikedMusics} from "../../redux/user/user.selectors";
 import MusicCard from "../../components/music-card/music-card.component";
-import MusicPlayer from "../../components/music-player/music-player.component"
-import "./favourites.styles.scss";
+import MusicPlayer from "../../components/music-player/music-player.component";
+import "./liked-songs.styles.scss";
 
 
-const Favourites = ({ light ,musics}) => {
-let song = musics[17];
-    // console.log(song  ,"home sonng"
-  // console.log(musics,"[favs]")
+const LikedSongs = ({ light ,likedMusics}) => {
+
+  const likes = () => {
+    if(likedMusics.length > 0){
+      const musics = likedMusics.map(({imgURL,title,addArtists,artists,id}) => <MusicCard
+          id={id}
+          key={id}
+          imgURL={imgURL}
+          title={title}
+          addArtists
+          artists={artists}
+          light={light}
+          />)
+      return musics;
+    }else{
+      return (<div className="liked-songs__none" style={{
+        backgroundColor:light ? "var(--dark)" : "var(--light)",
+        color:light ? "var(--text-w-d)" : "var(--text-w-l)",
+        textAlign:"center"
+      }}>
+        You haven't liked any music yet,to like click on the music player image ,which takes you the playing now page
+      </div>)
+    }
+  }
+  useEffect(()=> {
+    likes();
+  },[likedMusics])
+
   return (
-    <div className="favourites" style={{
+    <div className="liked-songs" style={{
       backgroundColor: light ? "var(--light)" : "var(--dark)"
     }}>
 
-      <div className="favourites__header">
+      <div className="liked-songs__header">
         
-        <div className="favourites__header--btns">
+        <div className="liked-songs__header--btns">
           
             <Link to="/">
               {
@@ -47,7 +71,7 @@ let song = musics[17];
 
 
 <svg width="25" height="22" viewBox="0 0 25 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M24.8907 4.98934L11.2907 4.98934M11.2907 4.98934C11.2907 3.22203 9.85806 1.78934 8.09075 1.78934C6.32344 1.78934 4.89075 3.22203 4.89075 4.98934M11.2907 4.98934C11.2907 6.75665 9.85806 8.18934 8.09075 8.18934C6.32344 8.18934 4.89075 6.75665 4.89075 4.98934M4.89075 4.98934L0.890747 4.98934M24.8907 17.7893L20.8907 17.7893M20.8907 17.7893C20.8907 16.022 19.4581 14.5893 17.6907 14.5893C15.9234 14.5893 14.4907 16.022 14.4907 17.7893M20.8907 17.7893C20.8907 19.5566 19.4581 20.9893 17.6907 20.9893C15.9234 20.9893 14.4907 19.5566 14.4907 17.7893M14.4907 17.7893L0.890747 17.7893" stroke="#EAF0FF" stroke-width="2"/>
+<path d="M24.8907 4.98934L11.2907 4.98934M11.2907 4.98934C11.2907 3.22203 9.85806 1.78934 8.09075 1.78934C6.32344 1.78934 4.89075 3.22203 4.89075 4.98934M11.2907 4.98934C11.2907 6.75665 9.85806 8.18934 8.09075 8.18934C6.32344 8.18934 4.89075 6.75665 4.89075 4.98934M4.89075 4.98934L0.890747 4.98934M24.8907 17.7893L20.8907 17.7893M20.8907 17.7893C20.8907 16.022 19.4581 14.5893 17.6907 14.5893C15.9234 14.5893 14.4907 16.022 14.4907 17.7893M20.8907 17.7893C20.8907 19.5566 19.4581 20.9893 17.6907 20.9893C15.9234 20.9893 14.4907 19.5566 14.4907 17.7893M14.4907 17.7893L0.890747 17.7893" stroke="#EAF0FF" strokeWidth="2"/>
 </svg>
 
 
@@ -63,29 +87,22 @@ let song = musics[17];
 
       </div>
 
-      <section className="favourites__container">
-        <h1 className="favourites__container--title" style={{
+      <section className="liked-songs__container">
+        <h1 className="liked-songs__container--title" style={{
           color: light ? "var(--dark)" : "var(--light)"
         }}>Liked Songs</h1>
 
 
 
-        <div className="favourites__content">
+        <div className="liked-songs__content">
           {
-          musics.slice(9).map(({imgURL,title,addArtists,artists,id}) => <MusicCard
-          key={id}
-          imgURL={imgURL}
-          title={title}
-          addArtists
-          artists={artists}
-          light={light}
-          />)
+          likes()
         }
         </div>
         <div style={{
                         marginTop:"4rem"
                     }}></div>
-        <MusicPlayer song={song} />
+        <MusicPlayer />
       </section>
 
     </div>
@@ -93,8 +110,8 @@ let song = musics[17];
 }
 const mapStateToProps = createStructuredSelector({
     light:selectBgMode,
-    musics:selectMusicsData
+    likedMusics:selectLikedMusics
 })
 
 
-export default connect(mapStateToProps)(Favourites);
+export default connect(mapStateToProps)(LikedSongs);

@@ -8,6 +8,114 @@
     &__cards{
                 display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px,.5fr));
-        grid-template-rows:repeat(auto-fit, minmax(250px,.5fr));
+        // grid-template-rows:repeat(auto-fit, minmax(250px,.5fr));
     }
 }
+
+
+
+
+@media screen and (max-width:33.75em){
+    .playlist{
+        width:100%;
+        flex:0.5;
+        display:flex;
+        flex-direction:column;
+        // align-items:center;
+        // overflow:scroll;
+        &__header{
+            margin-bottom:1.8rem;
+            font-size:1.85rem;
+            text-align: center;
+        }
+        &__cards{
+            display: grid;
+            // grid-template-columns: repeat(auto-fit, minmax(.1fr,.5fr));
+            // grid-template-rows: repeat(auto-fit,minmax(200px,250px));
+
+            grid-template-columns: repeat(auto-fit, minmax(200px,250px));
+    grid-template-rows: minmax(200px, 250px);
+
+            
+            
+        }
+    }
+
+} 
+@media screen and (max-width:31.75em){
+    .playlist{
+        width:100%;
+        flex:0.5;
+        display:flex;
+        flex-direction:column;
+        // align-items:center;
+        // overflow:scroll;
+        &__header{
+            margin-bottom:1.7rem;
+            font-size:1.8rem;
+            text-align: center;
+        }
+        &__cards{
+            display: grid;
+            // grid-template-columns: repeat(auto-fit, minmax(.1fr,.5fr));
+            // grid-template-rows: repeat(auto-fit,minmax(200px,250px));
+
+            grid-template-columns: repeat(auto-fit, minmax(180px,200px));
+    grid-template-rows: minmax(180px, 220px);
+
+            
+            
+        }
+    }
+
+}
+
+
+@media screen and (max-width:25.5em){
+    .playlist{
+        width:100%;
+        flex:0.5;
+        display:flex;
+        flex-direction:column;
+        // align-items:center;
+        // overflow:scroll;
+        &__header{
+            margin-bottom:1.5rem;
+            font-size:2rem;
+            text-align: center;
+        }
+        &__cards{
+            display: grid;
+            grid-template-columns: repeat(2, minmax(160px,180px));
+            grid-template-rows: minmax(160px, 180px);
+
+            
+            
+        }
+    }
+
+} 
+@media screen and (max-width:22.5em){
+    .playlist{
+        width:100%;
+        flex:0.5;
+        display:flex;
+        flex-direction:column;
+        // align-items:center;
+        // overflow:scroll;
+        &__header{
+            margin-bottom:1.5rem;
+            font-size:2rem;
+            text-align: center;
+        }
+        &__cards{
+            display: grid;
+            grid-template-columns: repeat(2, minmax(100px,160px));
+            grid-template-rows: minmax(100px, 160px);
+
+            
+            
+        }
+    }
+
+} 

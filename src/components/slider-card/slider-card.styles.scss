@@ -1,7 +1,8 @@
 .slider-card{
-    // position:relative;
-    min-height:40rem;
-    min-width:85rem;
+    min-height:10rem;
+    min-width:25rem;
+    max-height: 50rem;
+    max-width: 50rem;
     cursor:grab;
 
 
@@ -14,11 +15,11 @@
 
 
     &__img-container{
-        margin-top:2rem;
+        margin-top:1.5rem;
         // pointer-events: none;
         cursor:grab;
 		position: relative;
-		width: 80%;
+		width: 98%;
         height:80%;
 
 		&--img-1{
@@ -30,7 +31,7 @@
 			// cursor: pointer;
 			position: relative;
 			z-index: 5;
-			pointer-events: none;
+			// pointer-events: none;
             object-fit:cover;
             width:100%;
             // height:100%;
@@ -38,22 +39,26 @@
         }
 
 		&--img-2{
-            // user-select:none;
-            // -moz-user-select:none;
-            // -webkit-user-select:none;
-            // -ms-user-select:none;
-            // -webkit-touch-callout:none;
-            pointer-events: none;
+			//user-select:none;
+			//-moz-user-select:none;
+			//-webkit-user-select:none;
+			//-ms-user-select:none;
+			//-webkit-touch-callout:none;
+			pointer-events: none;
 			position: absolute;
 			top: 10%;
-            left:25%;
-            transform:rotateZ(180deg) scale(1.05) translateY(-50%);
-            object-fit:cover;            
-            width:60%;
-            // height:60%;
-			filter: blur(26px);
+			left:25%;
+			transform:rotateZ(180deg) scale(1.05) translateY(-50%);
+			object-fit:cover;
+			width:60%;
+			filter: blur(24px);
 			z-index: 1;
-        }
+			-webkit-filter: blur(24px);
+			-webkit-transform:rotateZ(180deg) scale(1.05) translateY(-50%);
+			-moz-transform:rotateZ(180deg) scale(1.05) translateY(-50%);
+			-ms-transform:rotateZ(180deg) scale(1.05) translateY(-50%);
+			-o-transform:rotateZ(180deg) scale(1.05) translateY(-50%);
+}
     }
 
     &__title{
@@ -82,3 +87,4 @@
     }
 	
 }
+

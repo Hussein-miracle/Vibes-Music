@@ -1,0 +1,3 @@
+- Implement music filter 
+- Finish the playing now page 
+- implement the music-player outlet on both home and likedSongs page

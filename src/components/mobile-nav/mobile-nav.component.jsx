@@ -7,32 +7,108 @@ import {createStructuredSelector} from "reselect";
 
 
 import {selectBgMode , selectMenuDisplay} from "../../redux/user/user.selectors";
+
+import { changeMode } from "../../redux/user/user.actions"
 import {closeMenu} from "../../redux/user/user.actions";
 
+
+
+import svgContainer from "../../assets/icons/sprite.svg"
 import SidebarItem from "../sidebar-item/sidebar-item.component";
 
 
-const MobileNav = ({light,show ,close}) => {
+import "./mobile-nav.styles.scss";
+
+const MobileNav = ({light,show ,close,toggleMode}) => {
     return (
         <div className="mobile-nav" style={{
-                backgroundColor:light ? "rgb(137, 150, 184)" : "var(--dark)",
+                backgroundColor:light ? "var(--light)" : "var(--dark)",
                 display: show ? "flex" : "none"
         }}>
-                <svg 
-                onClick={()=> close()} width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.01636 0.949158L18.001 17.9338" stroke="#EAF0FF" strokeWidth="2"/>
-<path d="M1.01636 17.9337L18.001 0.949148" stroke="#EAF0FF" strokeWidth="2"/>
-</svg>
 
-<Link to="/current-song">
-        <SidebarItem text="Profile" light={light}>
+
+                <div className="mobile-nav__header">
+        <button
+        className="mobile-nav__close-btn" 
+        onClick={()=> close()}>
+                                {
+                                        light ? (<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.01611 1L18.0007 17.9846" stroke="#091127" strokeWidth="2"/>
+        <path d="M1.01611 17.9846L18.0007 0.99999" stroke="#091127" strokeWidth="2"/>
+        </svg>
+        )  : (  <svg 
+                        width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M1.01636 0.949158L18.001 17.9338" stroke="#EAF0FF" strokeWidth="2"/>
+        <path d="M1.01636 17.9337L18.001 0.949148" stroke="#EAF0FF" strokeWidth="2"/>
+        </svg>)
+                                }
+
+                        </button>
+
+
+
+                           <button className="mobile-nav__header--btn" onClick={toggleMode}>
+          {
+            light ? 
+            <motion.svg className="mobile-nav__header--btn__icon"
+            initial={{
+              opacity:0,
+              x:-100
+            }}
+            animate={{
+              opacity:light ? 1 : 0,
+              x: light ? 0 : -100
+            }}
+
+            transition={{
+              type:"spring",
+              stiffness:250
+            }}
+         id="toggle" width="24" height="26" viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.65747 19.1789C2.34898 19.3238 3.06574 19.3999 3.80028 19.3999C9.54404 19.3999 14.2003 14.7437 14.2003 8.9999C14.2003 6.2076 13.0998 3.67231 11.309 1.80408C17.3518 1.96762 22.2002 6.91756 22.2002 12.9999C22.2002 19.1855 17.1858 24.1999 11.0002 24.1999C7.09844 24.1999 3.66266 22.2047 1.65747 19.1789Z" stroke="#8996B8" strokeWidth="2" strokeLinejoin="round"/>
+
+
+        </motion.svg>
+        :
+
+        <motion.svg className="mobile-nav__header--btn__icon-2"
+        initial={{
+              opacity:0,
+              x:0
+            }}
+            animate={{
+              opacity:light ?  0: 1,
+              x: light ? -100 : 0
+            }}
+
+            transition={{
+              type:"tween",
+              duration:2,
+              delay:1
+            }}
+         id="toggle">
+                <use
+                href={`${svgContainer}#icon-sun`}          
+                ></use>
+        </motion.svg>
+
+          }
+          
+          
+        </button>
+                </div>
+
+                
+
+
+        <SidebarItem text="Profile" light={light} clickable>
           <svg width="17" height="21" viewBox="0 0 17 21" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fillRule="evenodd" clipRule="evenodd" d="M12.5087 5.01909C12.5087 7.22698 10.718 9.01648 8.50871 9.01648C6.29937 9.01648 4.50871 7.22698 4.50871 5.01909C4.50871 2.8112 6.29937 1.0217 8.50871 1.0217C10.718 1.0217 12.5087 2.8112 12.5087 5.01909Z" stroke="#8996B8" strokeOpacity="0.6" strokeWidth="2" strokeLinecap="square"/>
               <path fillRule="evenodd" clipRule="evenodd" d="M15.1754 19.6762H1.84204C1.84204 18.7295 1.84204 17.8288 1.84204 17.0132C1.84204 14.8041 3.6329 13.0139 5.84204 13.0139H11.1754C13.3845 13.0139 15.1754 14.8041 15.1754 17.0132C15.1754 17.8288 15.1754 18.7295 15.1754 19.6762Z" stroke="#8996B8" strokeOpacity="0.6" strokeWidth="2" strokeLinecap="square"/>
            </svg>
 
         </SidebarItem>
-        </Link>
+
         <Link to="/liked-songs"><SidebarItem text="Liked Songs" clickable  light={light}>
           <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M10.5085 17.355L9.8014 18.0621C9.98893 18.2497 10.2433 18.355 10.5085 18.355C10.7737 18.355 11.0281 18.2497 11.2156 18.0621L10.5085 17.355ZM2.55588 9.40242L1.84877 10.1095H1.84877L2.55588 9.40242ZM9.22255 2.73575L8.51544 3.44286L8.51544 3.44286L9.22255 2.73575ZM10.5085 4.02171L9.8014 4.72882C10.1919 5.11934 10.8251 5.11934 11.2156 4.72882L10.5085 4.02171ZM11.7945 2.73575L11.0874 2.02865L11.0874 2.02865L11.7945 2.73575ZM11.2156 16.6479L3.26299 8.69531L1.84877 10.1095L9.8014 18.0621L11.2156 16.6479ZM17.754 8.69531L9.8014 16.6479L11.2156 18.0621L19.1682 10.1095L17.754 8.69531ZM8.51544 3.44286L9.8014 4.72882L11.2156 3.3146L9.92966 2.02865L8.51544 3.44286ZM11.2156 4.72882L12.5016 3.44286L11.0874 2.02865L9.8014 3.3146L11.2156 4.72882ZM15.1278 0.355042C13.6123 0.355042 12.1589 0.957055 11.0874 2.02865L12.5016 3.44286C13.1981 2.74634 14.1428 2.35504 15.1278 2.35504V0.355042ZM18.8418 6.06909C18.8418 7.05411 18.4505 7.9988 17.754 8.69531L19.1682 10.1095C20.2398 9.03794 20.8418 7.58455 20.8418 6.06909H18.8418ZM20.8418 6.06909C20.8418 2.91331 18.2836 0.355042 15.1278 0.355042V2.35504C17.179 2.35504 18.8418 4.01788 18.8418 6.06909H20.8418ZM5.88922 2.35504C6.87424 2.35504 7.81892 2.74634 8.51544 3.44286L9.92966 2.02865C8.85806 0.957056 7.40467 0.355042 5.88922 0.355042V2.35504ZM2.17517 6.06909C2.17517 4.01788 3.83801 2.35504 5.88922 2.35504V0.355042C2.73344 0.355042 0.175171 2.91331 0.175171 6.06909H2.17517ZM3.26299 8.69531C2.56647 7.99879 2.17517 7.05411 2.17517 6.06909H0.175171C0.175171 7.58455 0.777183 9.03793 1.84877 10.1095L3.26299 8.69531Z" fill="#8996B8" fillOpacity="0.6"/>
@@ -68,6 +144,7 @@ const MobileNav = ({light,show ,close}) => {
         </SidebarItem>
 
         </div>
+
     )
 }
 
@@ -77,7 +154,9 @@ const mapStateToProps = createStructuredSelector({
     show:selectMenuDisplay
 })
 const mapDispatchToProps = (dispatch) => ({
-    close: () => dispatch(closeMenu())
+    close: () => dispatch(closeMenu()),
+    toggleMode: () => dispatch(changeMode())
+
 })
 
 
