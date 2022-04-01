@@ -10,7 +10,11 @@ const INITIAL_STATE = {
     currentMusic:data[0]    ,  
     allMusics:data,
     likedMusics:[],
-    play:false
+    play:false,
+    musicPlayingDetails:{
+        time:null,
+        dur:null 
+    }
 
 }
 
@@ -26,6 +30,11 @@ const userReducer = (state=INITIAL_STATE,action) => {
                     ...state,
                     menuDisplay:true
                 }
+        case UserActionTypes.SET_RANDOM_MUSIC: 
+                return {
+                    ...state,
+                    currentMusic:generateRandomMusic(state.allMusics)
+                }
         case UserActionTypes.CLOSE_MENU: 
                 return {
                     ...state,
@@ -35,6 +44,11 @@ const userReducer = (state=INITIAL_STATE,action) => {
                 return {
                     ...state,
                     play:true
+                }
+        case UserActionTypes.REPEAT_CURRENT_MUSIC: 
+                return {
+                    ...state,
+                    currentMusic:playClickedMusic(state.allMusics,action.payload)
                 }
         case UserActionTypes.PAUSE_MUSIC: 
                 return {
@@ -62,6 +76,12 @@ const userReducer = (state=INITIAL_STATE,action) => {
                 return {
                     ...state,
                     currentMusic:playClickedMusic(state.allMusics,action.payload)
+                }
+        case UserActionTypes.SET_MUSIC_DETAILS: 
+        console.log(action.payload)
+                return {
+                    ...state,
+                    musicPlayingDetails:action.payload
                 }
         default:
             return {...state,currentMusic:data[10]};

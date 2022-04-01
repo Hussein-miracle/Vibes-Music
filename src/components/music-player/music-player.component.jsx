@@ -7,13 +7,13 @@ import {createStructuredSelector} from "reselect";
 
 import {selectBgMode,selectCurrentMusic,selectPlayState} from "../../redux/user/user.selectors";
 
-import { playMusic,pauseMusic , playNextMusic , playPreviousMusic} from '../../redux/user/user.actions';
+import { playMusic,pauseMusic , playNextMusic , playPreviousMusic,setMusicDetails } from '../../redux/user/user.actions';
 import svgContainer from "../../assets/icons/sprite.svg";
 import "./music-player.styles.scss";
 
 
 
-const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,playNext}) => {
+const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,playNext,setMusicDetails}) => {
   const [ID ,setID] = useState(null) ;
   const {id,imgURL,srcURL,title,artists} = currentMusic;
   const [progress , setProgress] = useState("0%")
@@ -44,7 +44,9 @@ const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,
   const setCurrentProgress = (e) =>{
     const {duration , currentTime} = e.target;
     let percent = `${(currentTime / duration) * 100}%`;
-    setProgress(percent)
+    setProgress(percent);
+     
+
 
   }
 
@@ -280,6 +282,7 @@ const mapDispatchToProps = (dispatch) => ({
   pauseMusic: () => dispatch(pauseMusic()),
   playNext: (curMusicIndex) => dispatch(playNextMusic(curMusicIndex)),
   playPrevious: (curMusicIndex) => dispatch(playPreviousMusic(curMusicIndex)),
+  setMusicDetails: (musicDet) => dispatch(setMusicDetails(musicDet)),
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(MusicPlayer);

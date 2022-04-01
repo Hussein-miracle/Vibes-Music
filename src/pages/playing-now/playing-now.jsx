@@ -21,9 +21,9 @@ import SliderCard from "../../components/slider-card/slider-card.component";
 import PlayingNowPlayer from "../../components/playing-now-player/playing-now-player";
 
 // import {selectMusicsData} from "../../redux/musics/musics.selectors";
-import {selectBgMode , selectAllMusics } from "../../redux/user/user.selectors";
+import {selectBgMode , selectAllMusics ,selectCurrentMusic} from "../../redux/user/user.selectors";
 
-const PlayingNow = ({light,musics}) => {
+const PlayingNow = ({light,musics,curMusic}) => {
     const [sliderPosition,setSliderPosition] = useState(0);
     const [progress , setProgress] = useState("0%")
     const audioTag = useRef(null); 
@@ -108,7 +108,7 @@ const PlayingNow = ({light,musics}) => {
       onSwiper={(swiper) => console.log(swiper)}
 
       effect={'coverflow'}
-    initialSlide={0}
+    initialSlide={curMusic.id - 1}
 
     grabCursor={true}
     centeredSlides={true}
@@ -176,7 +176,8 @@ const PlayingNow = ({light,musics}) => {
 
 const mapStateToProps = createStructuredSelector({
     light:selectBgMode,
-    musics:selectAllMusics
+    musics:selectAllMusics,
+    curMusic:selectCurrentMusic
 })
 
 

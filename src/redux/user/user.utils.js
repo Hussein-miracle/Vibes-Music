@@ -3,13 +3,14 @@ export const playClickedMusic = (musics,musicId) => {
     const findMusic = musics.find( music => music.id  === musicId)
     // console.log(findMusic);
 
-    return findMusic
+    return findMusic;
 }
 
 export const generateRandomMusic = (musics) => {
-    const randomNum = Math.floor(Math.random() * musics.length  + 1);
+    const randomNum = Math.floor(Math.random() * musics.length);
     // console.log(randomNum)
     const randomMusic = musics[randomNum];
+     console.log(randomMusic)
 
 
     return randomMusic;

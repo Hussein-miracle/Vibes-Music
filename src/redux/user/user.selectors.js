@@ -16,6 +16,10 @@ export const selectCurrentMusic =  createSelector(
     [selectUser],
     (user)=> user.currentMusic 
 )
+export const selectMusicDetails =  createSelector(
+    [selectUser],
+    (user)=> user.musicPlayingDetails
+)
 
 
 export const selectAllMusics =  createSelector(

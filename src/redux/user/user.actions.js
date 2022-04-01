@@ -10,6 +10,11 @@ export const openMenu = () => {
         type:UserActionTypes.OPEN_MENU
     }
 }
+export const  getRandomMusic = () => {
+    return {
+        type:UserActionTypes.SET_RANDOM_MUSIC
+    }
+}
 
 
 export const closeMenu = () => {
@@ -20,6 +25,10 @@ export const closeMenu = () => {
 
 export const setCurrentMusic = (musicId) => ({
     type:UserActionTypes.SET_CURRENT_MUSIC,
+    payload:musicId
+})
+export const repeatCurrentMusic = (musicId) => ({
+    type:UserActionTypes.REPEAT_CURRENT_MUSIC,
     payload:musicId
 })
 
@@ -54,5 +63,11 @@ export const playPreviousMusic = (curMusicIndex) => {
     return {
         type:UserActionTypes.PLAY_PREVIOUS_MUSIC,
         payload:curMusicIndex
+    }
+}
+export const setMusicDetails = (musicDetail) => {
+    return {
+        type:UserActionTypes.SET_MUSIC_DETAILS,
+        payload:musicDetail
     }
 }

@@ -1,3 +1,2 @@
 - Implement music filter 
-- Finish the playing now page 
-- implement the music-player outlet on both home and likedSongs page
+- make the playing now page responsive and the slider should respond to the next and prev buttons

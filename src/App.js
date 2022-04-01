@@ -23,11 +23,8 @@ function App() {
     <div className="App"> 
     {/* <Suspense fallback={<Spinner/>}> */}
         <Routes>
-          {/* <Route path="/"  element={<Navigate to="/home" />} >
-        
-            <MusicPlayer/>
-          </Route> */}
-          <Route path="/home"  element={<Home/>} />
+          
+          <Route path="/"  element={<Home/>} />
           <Route path="/liked-songs" element={<LikedSongs/>} />
           
           <Route path="/current-song" element={<PlayingNow/>} />

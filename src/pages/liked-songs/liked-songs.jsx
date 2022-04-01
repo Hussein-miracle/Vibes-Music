@@ -1,16 +1,27 @@
 import React,{useEffect} from 'react';
 import{Link} from "react-router-dom";
-import {connect} from "react-redux";
+import {connect,useDispatch} from "react-redux";
 
 import {createStructuredSelector} from "reselect";
 
 import {selectBgMode , selectAllMusics,selectLikedMusics} from "../../redux/user/user.selectors";
+
+import {setCurrentMusic} from "../../redux/user/user.actions";
 import MusicCard from "../../components/music-card/music-card.component";
 import MusicPlayer from "../../components/music-player/music-player.component";
 import "./liked-songs.styles.scss";
 
 
 const LikedSongs = ({ light ,likedMusics}) => {
+  const dispatch=useDispatch();
+
+  useEffect(()=>{
+
+    if(likedMusics.length > 0){
+      dispatch(setCurrentMusic(likedMusics[0].id))
+    }
+
+  },[likedMusics])
 
   const likes = () => {
     if(likedMusics.length > 0){
@@ -30,7 +41,7 @@ const LikedSongs = ({ light ,likedMusics}) => {
         color:light ? "var(--text-w-d)" : "var(--text-w-l)",
         textAlign:"center"
       }}>
-        You haven't liked any music yet,to like click on the music player image ,which takes you the playing now page
+        You haven't liked any music yet,to like click on the music player image ,which takes you the playing now page,showing the current music you're playing
       </div>)
     }
   }
@@ -102,7 +113,7 @@ const LikedSongs = ({ light ,likedMusics}) => {
         <div style={{
                         marginTop:"4rem"
                     }}></div>
-        <MusicPlayer />
+        {likedMusics.length > 0 && <MusicPlayer />}
       </section>
 
     </div>
