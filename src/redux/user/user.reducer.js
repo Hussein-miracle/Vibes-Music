@@ -1,19 +1,23 @@
 import UserActionTypes from "./user.types";
+
 import { playClickedMusic ,generateRandomMusic,addMusicToLikedMusics ,getPreviousMusic , getNextMusic} from "./user.utils";
-import data from "../../data.js"
+
+import data from "../../data.js";
+
 // import MusicsActionsTypes from "./musics.types";
 
 
 const INITIAL_STATE = {
-    lightMode:!true,
+    lightMode:true,
     menuDisplay:false,
     currentMusic:data[0]    ,  
     allMusics:data,
     likedMusics:[],
     play:false,
     musicPlayingDetails:{
-        time:null,
-        dur:null 
+        time:0,
+        dur:0 ,
+        index:0
     }
 
 }
@@ -78,13 +82,13 @@ const userReducer = (state=INITIAL_STATE,action) => {
                     currentMusic:playClickedMusic(state.allMusics,action.payload)
                 }
         case UserActionTypes.SET_MUSIC_DETAILS: 
-        console.log(action.payload)
+
                 return {
                     ...state,
                     musicPlayingDetails:action.payload
                 }
         default:
-            return {...state,currentMusic:data[10]};
+            return {...state,currentMusic:generateRandomMusic(state.allMusics)};
     }
 }
 

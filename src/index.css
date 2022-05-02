@@ -35,9 +35,7 @@ button{
   background-color:transparent;
   outline:none;
   border:none;
-  &:focus{
-    outline:none;
-  }
+  
 }
 
 html {

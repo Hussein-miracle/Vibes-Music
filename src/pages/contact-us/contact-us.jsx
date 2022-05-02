@@ -10,7 +10,7 @@ const ContactUs = ({light}) => {
         <div className="contact-us" style={{
             backgroundColor:  light ?  "var(--light)" : "var(--dark)"
         }}>
-Contact Us
+            Contact Us
         </div>
     )
 }

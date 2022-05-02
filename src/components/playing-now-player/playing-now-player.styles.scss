@@ -2,14 +2,12 @@
     padding: 1.5rem;
     display: flex;
     flex-direction:column;
-    // height:25vh;
     gap: 2rem;
     flex:.27;
-    // background-color:gold;
+
     svg{
         width: 2.6rem;
         height: 2.6rem;
-        // margin: 5px;
     }
     &__btns-1{
         display:flex;
@@ -22,6 +20,28 @@
             
             gap: 1rem;
     
+        }
+
+        .btns{
+            width:10vw;
+            position:absolute;
+            left:50%;
+            transform:translateX(-50%);
+            display:flex;
+        justify-content:space-between;
+
+
+            button{
+                background:transparent;
+                width:3vw;
+            }
+
+            .right{
+                svg{
+                    transform:rotate(180deg);
+                }
+            }
+            
         }
     }
     &__btns-2{

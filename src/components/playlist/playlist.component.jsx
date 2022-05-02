@@ -22,7 +22,7 @@ const Playlist = ({light,musics}) => {
                     <div className="playlist__cards">
 
             {
-                musics.slice(9,18).map(({imgURL,title,id}) =>  <MusicCard light={light} id={id} key={id} imgURL={imgURL} title={title} />)
+                musics.slice(9).map(({imgURL,title,id}) =>  <MusicCard light={light} id={id} key={id} imgURL={imgURL} title={title} />)
             }
     
                     

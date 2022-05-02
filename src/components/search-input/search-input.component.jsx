@@ -21,7 +21,9 @@ const SearchInput = ({light}) => {
         })
     }
     return (
-        <div className="search" id="search">
+        <div className="search" id="search" style={{
+            // display:"none"
+        }}>
             
                     <input
                     style={{

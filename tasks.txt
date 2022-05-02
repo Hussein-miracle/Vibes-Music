@@ -1,2 +1,0 @@
-- Implement music filter 
-- make the playing now page responsive and the slider should respond to the next and prev buttons

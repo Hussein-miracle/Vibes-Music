@@ -42,8 +42,12 @@
 
     &__none{
         width:35vw;
-        height:6vh;
+        height:40vh;
         position:fixed;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:4px;
         top:50%;
         left:50%;
         transform:translate(-50%,-50%)    ;
@@ -51,6 +55,8 @@
         -moz-transform:translate(-50%,-50%)    ;
         -ms-transform:translate(-50%,-50%)    ;
         -o-transform:translate(-50%,-50%)    ;
+
+        font-size:medium;
 }
 
     &__content{
@@ -162,6 +168,11 @@
            grid-template-columns: repeat(auto-fit, minmax(250px,260px));
         grid-template-rows:repeat(auto-fit, minmax(200px,260px));
         }
+
+        &__none{
+            width:40vw;
+            height:40vh;
+        }
     }
 }
 
@@ -209,6 +220,12 @@
             display: grid;
             grid-template-columns: repeat(2, minmax(160px,180px));
             grid-template-rows: minmax(160px, 180px);
+        }
+
+
+        &__none{
+            width:70vw;
+            height:50vh;
         }
     }
 }

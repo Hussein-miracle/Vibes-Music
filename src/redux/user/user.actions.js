@@ -65,6 +65,8 @@ export const playPreviousMusic = (curMusicIndex) => {
         payload:curMusicIndex
     }
 }
+
+
 export const setMusicDetails = (musicDetail) => {
     return {
         type:UserActionTypes.SET_MUSIC_DETAILS,

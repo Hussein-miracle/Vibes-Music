@@ -8,21 +8,25 @@ import {createStructuredSelector} from "reselect";
 import {selectBgMode,selectCurrentMusic,selectPlayState} from "../../redux/user/user.selectors";
 
 import { playMusic,pauseMusic , playNextMusic , playPreviousMusic,setMusicDetails } from '../../redux/user/user.actions';
+import {getMusicIndex} from '../../redux/user/user.utils';
 import svgContainer from "../../assets/icons/sprite.svg";
 import "./music-player.styles.scss";
 
 
 
 const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,playNext,setMusicDetails}) => {
-  const [ID ,setID] = useState(null) ;
   const {id,imgURL,srcURL,title,artists} = currentMusic;
-  const [progress , setProgress] = useState("0%")
+  const [progress , setProgress] = useState("0%");
+  const [musicUpdate,setMusicUpdate] = useState({
+    time:0,
+    dur:0 ,
+    index: getMusicIndex(id)
+  })
 
 
   const audioTag = useRef(null); 
 
   useEffect(()=>{
-    console.log(ID)
     if(audioTag && audioTag?.current?.isConnected){
       setProgress("0%");
       if(play){
@@ -34,39 +38,41 @@ const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,
   },[currentMusic,play])
 
 
-  useEffect(()=>{
-    if(id){
-      setID(id)
-    }
-  },[id])
-
+  const handleUpdatePlayingNowPlayer = () => {
+    setMusicDetails(musicUpdate);
+  }
 
   const setCurrentProgress = (e) =>{
     const {duration , currentTime} = e.target;
     let percent = `${(currentTime / duration) * 100}%`;
     setProgress(percent);
-     
+    setMusicUpdate({
+        time:currentTime,
+        dur:duration,
+        index:getMusicIndex(id)
+    })
 
 
   }
 
 
   const seekProgress = (e) =>{
-    console.log(e)
+    // console.log(e)
     let positionClicked = e.clientX 
     let totalWidth = e.target.clientWidth;
     let seekTo = (positionClicked / totalWidth) ;
     audioTag.current.currentTime = seekTo * audioTag.current?.duration;
-    setProgress(`${seekTo * 100}`)
+    setProgress(`${seekTo * 100}`);
+
 
 
   }
 
   const handleMusicEnded = (e) => {
-    console.log(e);
+    // console.log(e);
     setProgress("0%");
     pauseMusic();
-    playNextMusic(ID);
+    playNext(id);
     
   }
 
@@ -86,7 +92,7 @@ const MusicPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,
     let seekTo = (positionClicked / totalWidth) ;
     audioTag.current.currentTime = seekTo * audioTag.current?.duration;
     setProgress(`${seekTo * 100}`)
-    console.log(e)
+    // console.log(e)
   }
 
   
@@ -133,22 +139,6 @@ const renderPlay = () => {
      return playBtn;
 }
 
-   
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     return (
         <div className="music-player" 
@@ -178,20 +168,23 @@ const renderPlay = () => {
 
               <audio src={`${srcURL}`} ref={audioTag} preload="metadata" id={id.toString()} 
               onTimeUpdate={setCurrentProgress} 
-              onEnded={handleMusicEnded}
+              onEnded={handleMusicEnded} 
               />
 
             <div className="main-controls">
                 <div className="music-player__content">
                   <Link to="/current-song">
                     <img
+                    onClick={handleUpdatePlayingNowPlayer}
                       src={`${imgURL}`}
                       alt={`${title}`}
                       className="music-player__content-img"
                     />
                   </Link>
 
-                  <div className="music-player__content--details">
+                  <div className="music-player__content--details"
+                  onClick={handleUpdatePlayingNowPlayer}>
+                    <Link to="/current-song">
                     <h3 className="music-player__content--title"
                     style={{
            color:light ? "var(--dark)" : "var(--light)"
@@ -204,6 +197,7 @@ const renderPlay = () => {
          }}>
                       {artists}
                     </h4>
+                    </Link>
                   </div>
                 </div>
 
@@ -230,14 +224,8 @@ const renderPlay = () => {
                       }
                     </button>
 
-                    <button className="music-btn__play"
-                    // onClick={() => handlePlay()}
-                    >
-
-                      { play ? renderPause() : renderPlay()  }
-                      
-
-                      
+                    <button className="music-btn__play">
+                      { play ? renderPause() : renderPlay()  }                      
                     </button>
 
                     <button className="music-btn__forward">

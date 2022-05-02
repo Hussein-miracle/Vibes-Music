@@ -14,7 +14,6 @@ import Overlay from "../../components/overlay/overlay.component";
 
 import "./home.styles.scss";
 
-
 import { openMenu} from '../../redux/user/user.actions';
 
 
