@@ -14,16 +14,6 @@ const MusicCard = ({imgURL,title,addArtists,artists,light,id,setCurrentMusic,lik
 
         onDoubleClick={() => likeMusic(id)}
         
-        drag
-
-        dragElastic={3} 
-
-        dragConstraints= {{
-                left:0,
-                right:0,
-                top:0,
-                bottom:0
-            }}
         >
 
             <motion.div className="music-card__img-container" title={artists} >

@@ -300,3 +300,18 @@
     }
   }
 }
+
+@media screen and (max-width:28.75em){
+  .like-button{
+    position:relative;
+    right:-68px;
+    bottom:50px;
+    z-index:100;
+    svg {
+      cursor: pointer;
+      overflow: visible;
+      width: 45px;
+      margin: 5px;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import {connect,useDispatch} from "react-redux";
 
 import {createStructuredSelector} from "reselect";
 
-import {selectBgMode , selectAllMusics,selectLikedMusics} from "../../redux/user/user.selectors";
+import {selectBgMode ,selectLikedMusics} from "../../redux/user/user.selectors";
 
 import {setCurrentMusic} from "../../redux/user/user.actions";
 import MusicCard from "../../components/music-card/music-card.component";
@@ -41,7 +41,7 @@ const LikedSongs = ({ light ,likedMusics}) => {
         color:light ? "var(--text-w-d)" : "var(--text-w-l)",
         textAlign:"center"
       }}>
-        You haven't liked any music yet,to like click on the music player image ,which takes you the playing now page,showing the current music you're playing
+        You haven't liked any music yet,to like a music click on the music player  title or name or image ,which takes you the playing now page,showing the current music you're playing,then click on the like button
       </div>)
     }
   }

@@ -196,7 +196,7 @@
             padding: 0;
             display: grid;
                         grid-template-columns: repeat(auto-fit, minmax(180px,245px));
-    grid-template-rows: minmax(180px, 245px);
+    grid-template-rows: repeat(auto-fit,minmax(180px, 245px));
     place-items: center;
         }
     }
@@ -207,7 +207,7 @@
             padding: 0;
             display: grid;
             grid-template-columns: repeat(2, minmax(180px,235px));
-            grid-template-rows: minmax(180px, 230px);
+            grid-template-rows: repeat(auto-fit,minmax(180px, 230px));
         }
     }
 }
@@ -219,7 +219,7 @@
             padding: 0;
             display: grid;
             grid-template-columns: repeat(2, minmax(160px,180px));
-            grid-template-rows: minmax(160px, 180px);
+            grid-template-rows: repeat(auto-fit,minmax(160px,180px));
         }
 
 
