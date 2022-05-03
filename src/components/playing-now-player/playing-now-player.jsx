@@ -23,7 +23,7 @@ import {selectBgMode,selectCurrentMusic,selectPlayState,selectAllMusics} from ".
 import { playMusic,pauseMusic , playNextMusic , playPreviousMusic ,getRandomMusic ,repeatCurrentMusic} from '../../redux/user/user.actions';
 
 
-const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,playNext,musics,handleClickedRight ,handleClickedLeft}) => {
+const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrevious,playNext,musics,handleClickedRight ,handleClickedLeft,setSliderPosition}) => {
     const  dispatch = useDispatch();
     const {id,srcURL} = currentMusic;
     const [repeat,setRepeat] = useState(false)
@@ -31,9 +31,9 @@ const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrev
   const [curTime , setCurTime] = useState({minutes:0,seconds:0});
   const [duratio, setDuratio] = useState({minutes:0,seconds:0});
   const [muted,setMuted] = useState(false)
-  const musicDetails = useSelector((state)=>state.user.musicPlayingDetails)
+  const musicDetails = useSelector((state)=>state.user.musicPlayingDetails);
+  const curMusicIndex = musics.findIndex( music =>  music.id === currentMusic.id);
   
-
   const audio = useRef(null); 
 
 
@@ -56,18 +56,6 @@ const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrev
         audio.current.src = srcURL;
     }
 
-    
-    // if(audio?.current?.currenTime && musicDetails.time){
-    //       audio.current.currentTime = musicDetails.time;
-    //     //   setDuratio(handleTime(audio.current.duration));
-    //     //   setCurTime(handleTime(audio.current.currentTime));
-    //     //   playMusic()
-    //   }
-
-    //   if(!play  && audio?.current?.currentTime){
-    //         audio.current.play();
-    //         playMusic();
-    //     }
 
     
 
@@ -83,17 +71,13 @@ const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrev
       }
     }
   },[currentMusic,play])
-//   useEffect(()=> {
-
-//       if(audio && !isNaN(audio?.current?.currentTime)){
-//           setDuratio(handleTime(audio.current.duration));
-//           setCurTime(handleTime(audio.current.currentTime));
-//       }
-
-//   },[audio?.current?.currentTime])
 
 
 
+  const handleMusicEnded = () => {
+    playNext(id);
+    setSliderPosition(curMusicIndex + 1);
+  }
 
 
   const handleTime = (timeInSecs) => {
@@ -187,7 +171,7 @@ const PlayingNowPlayer = ({light,currentMusic,play,playMusic,pauseMusic,playPrev
 
 <audio src={`${srcURL}`} ref={audio} preload="metadata" id={id.toString()} 
               onTimeUpdate={setCurrentProgress} 
-              onEnded={()=> dispatch(playNextMusic(id))}
+              onEnded={handleMusicEnded}
               />
         <div className="playing-now-player__btns-1">
             <button>

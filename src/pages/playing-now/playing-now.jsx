@@ -11,13 +11,12 @@ import svgCont from "../../assets/icons/sprite.svg";
 import SliderCard from "../../components/slider-card/slider-card.component";
 import PlayingNowPlayer from "../../components/playing-now-player/playing-now-player";
 
-// import {selectMusicsData} from "../../redux/musics/musics.selectors";
 import {selectBgMode , selectAllMusics ,selectCurrentMusic} from "../../redux/user/user.selectors";
 
 const PlayingNow = ({light,musics,curMusic}) => {
     const musicIndex = useSelector((state) => state.user.musicPlayingDetails.index)
     const [sliderPosition,setSliderPosition] = useState(0);
-
+   
 
     useEffect(() => {
         setSliderPosition(musicIndex);
@@ -117,7 +116,7 @@ const PlayingNow = ({light,musics,curMusic}) => {
 
 
 
-                <PlayingNowPlayer handleClickedRight={onRightClick} handleClickedLeft={onLeftClick}/>
+                <PlayingNowPlayer  setSliderPosition={setSliderPosition} handleClickedRight={onRightClick} handleClickedLeft={onLeftClick}/>
 
             </div>
 
