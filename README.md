@@ -3,4 +3,4 @@ This Figma design link: [https://www.figma.com/file/qKWssqYYNm3etgasCyoeEZ/Music
 ]
 The design is by Om Arya a product designer.
 
-Live link: [https://www.vibes-musics.netlify.app]
+Live link: [http://vibes-musics.netlify.app/]
